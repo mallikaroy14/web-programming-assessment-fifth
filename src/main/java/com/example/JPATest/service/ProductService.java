@@ -27,21 +27,16 @@ public class ProductService {
         return product;
     }
 
-    public Optional<Product> getById(Long id){
+    public Optional<Product> getById(Long id) {
         Optional<Product> product = productRepository.findById(id);
         return product;
     }
 
-
     public Product updateProduct(Product product) {
         Optional<Product> productOptional = productRepository.findById(product.getId());
-        if (productOptional.isPresent()) {
-            productOptional.get().setName(product.getName());
-            Product updatedProduct = productRepository.save(productOptional.get());
-            return updatedProduct;
-        } else {
-            throw new EntityNotFoundException("Product with the given id is not exist. Please check Products Items");
-        }
+        productOptional.get().setName(product.getName());
+        Product updatedProduct = productRepository.save(productOptional.get());
+        return updatedProduct;
     }
 
     public String deleteById(Long id) {

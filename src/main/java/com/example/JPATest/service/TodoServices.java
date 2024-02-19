@@ -34,13 +34,9 @@ public class TodoServices {
 
     public Todo updateTodo(Todo todo) {
         Optional<Todo> todoOptional = todoRepository.findById(todo.getId());
-        if (todoOptional.isPresent()) {
             todoOptional.get().setDescription(todo.getDescription());
             Todo updatedProduct = todoRepository.save(todoOptional.get());
             return updatedProduct;
-        } else {
-            throw new EntityNotFoundException("Product with the given id is not exist. Please check Products Items");
-        }
     }
 
     public String deleteById(Long id) {
